@@ -22,9 +22,20 @@ int main() {
         // Remove newline
         input[strcspn(input, "\n")] = 0;
 
-        // 3. Exit command
         if (strcmp(input, "exit") == 0) {
             printf("Goodbye!\n");
+            break;
+        }
+
+        if(strcmp(input, "help")==0){
+            // printf("deep-shell supported commands:\n- cd\n- exit\n- help\n- system commands like ls , pwd , date\n");
+            printf("\n=== deep-shell help ===\n");
+            printf("Built-in commands:\n");
+            // printf("  cd <dir>   - change directory\n");
+            printf("  exit       - exit shell\n");
+            printf("  help       - show this help message\n");
+            printf("\nSystem commands (use Linux binaries):\n");
+            printf("  ls, pwd, date, cat, echo, etc.\n\n");
             break;
         }
 
