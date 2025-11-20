@@ -11,7 +11,7 @@ int main() {
 
     while (1) {
         // 1. Print prompt
-        printf("\e[1;32mdeep-shell \033[0;34m→ ");
+        printf("\033[1;32mmyshell>\033[0m ");
         fflush(stdout);
 
         // 2. Read input
@@ -42,8 +42,11 @@ int main() {
         pid_t pid = fork();
         if (pid == 0) {
             // child runs command
-            execvp(args[0], args);
-            perror("Command failed");
+            if(execvp(args[0], args)==-1){
+                printf("\x1b[31mcommand doesnot exit: '%s'\x1b[0m\n",args[0]);
+
+            }
+            // perror("command not found '%s'\n",args[0]);
             exit(1);
         } else {
             // parent waits
