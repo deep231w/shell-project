@@ -11,7 +11,7 @@ int main() {
 
     while (1) {
         // 1. Print prompt
-        printf("myshell> ");
+        printf("\e[1;32mdeep-shell \033[0;34m→ ");
         fflush(stdout);
 
         // 2. Read input
