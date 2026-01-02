@@ -39,6 +39,9 @@ int main() {
             break;
         }
 
+        //cd command
+        
+
         // 4. Parse into args
         char *args[64];
         int i = 0;
