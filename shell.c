@@ -36,11 +36,8 @@ int main() {
             printf("  help       - show this help message\n");
             printf("\nSystem commands (use Linux binaries):\n");
             printf("  ls, pwd, date, cat, echo, etc.\n\n");
-            break;
-        }
-
-        //cd command
-        
+            continue;
+        }        
 
         // 4. Parse into args
         char *args[64];
@@ -52,7 +49,20 @@ int main() {
             args[i] = strtok(NULL, " ");
         }
 
-        // 5. Fork child
+        //cd command
+        if(strcmp(args[0],"cd")==0){
+            if(args[1]==NULL){
+                printf("cd:missing argument\n");
+            }else{
+                if(chdir(args[1])!=0){
+                    perror("cd");
+                }
+            }
+
+            continue;
+        }
+
+        // Fork child
         pid_t pid = fork();
         if (pid == 0) {
             // child runs command
@@ -60,7 +70,7 @@ int main() {
                 printf("\x1b[31mcommand doesnot exit: '%s'\x1b[0m\n",args[0]);
 
             }
-            // perror("command not found '%s'\n",args[0]);
+            //perror("command not found '%s'\n",args[0]);
             exit(1);
         } else {
             // parent waits
